@@ -18,7 +18,7 @@ public class Eydi {
     }
 
     public int countEydis() {
-        findNextEydi(new Index(-1, -1), true);
+        findNextEydi(new Index(-1, -1));
 
         int size = foundEydis.size();
 
@@ -28,11 +28,8 @@ public class Eydi {
         return size;
     }
 
-    private void findNextEydi(Index index, boolean findingFirstEydi) {
+    private void findNextEydi(Index index) {
         Holder eydi = findEydi(index);
-
-        if (eydi == null && findingFirstEydi)
-            findNextEydi(getNextIndex(index), true);
 
         if (eydi != null) {
             Holder lastEydi = getLastEydi();
@@ -40,7 +37,7 @@ public class Eydi {
                 throw new PoorUncle();
             }
             foundEydis.add(eydi);
-            findNextEydi(eydi.getY(), false);
+            findNextEydi(eydi.getY());
         }
     }
 
@@ -77,7 +74,7 @@ public class Eydi {
             if (!isInRange(row, rowCount))
                 continue;
 
-            int columnCount = table[row].length;
+            int columnCount = getRowLength(row);
             for (int column = columnStart; column < columnCount; column++) {
                 if (isInThisPosition(target, row, column - 1))
                     return new Index(row, column - 1);
@@ -100,9 +97,7 @@ public class Eydi {
         if (!isInRange(row, table.length))
             return false;
 
-        char[] columns = table[row];
-
-        if (!isInRange(column, columns.length))
+        if (!isInRange(column, getRowLength(row)))
             return false;
 
         return table[row][column] == c;
@@ -116,11 +111,18 @@ public class Eydi {
         int row = index.getRow();
         int column = index.getColumn();
 
-        char[] currentColumns = table[row];
-        if (column + 1 < currentColumns.length)
+        if (row < 0)
+            return new Index(0, 0);
+
+        int rowLength = getRowLength(row);
+        if (column + 1 < rowLength)
             return new Index(row, column + 1);
 
         return new Index(row + 1, 0);
+    }
+
+    private int getRowLength(int rowIndex) {
+        return table[rowIndex].length;
     }
 
     public Holder getLastEydi() {

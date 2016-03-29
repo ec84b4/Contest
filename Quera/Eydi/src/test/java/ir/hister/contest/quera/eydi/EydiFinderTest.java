@@ -4,9 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Random;
-
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -79,33 +76,33 @@ public class EydiFinderTest {
     public void testCountEydis() throws Exception {
         Assert.assertEquals(4, eydiFinder.countEydis());
 
-        Random random = new Random();
-        int rowCount = random.nextInt(10);
-        int columnCount = random.nextInt(10);
-        char[][] table = new char[rowCount][columnCount];
-        for (int row = 0; row < rowCount; row++) {
-            for (int column = 0; column < columnCount; column++) {
-                int i = random.nextInt(4);
-                switch (i) {
-                    case 0:
-                        table[row][column] = EydiFinder.E;
-                        break;
-                    case 1:
-                        table[row][column] = EydiFinder.Y;
-                        break;
-                    case 2:
-                        table[row][column] = EydiFinder.D;
-                        break;
-                    case 3:
-                        table[row][column] = EydiFinder.I;
-                        break;
-                }
-            }
-        }
-        eydiFinder = new EydiFinder(table);
-        System.out.println(eydiFinder.countEydis());
-        for (char[] chars : table) {
-            System.out.println(Arrays.toString(chars));
-        }
+//        Random random = new Random();
+//        int rowCount = random.nextInt(10);
+//        int columnCount = random.nextInt(10);
+//        char[][] table = new char[rowCount][columnCount];
+//        for (int row = 0; row < rowCount; row++) {
+//            for (int column = 0; column < columnCount; column++) {
+//                int i = random.nextInt(4);
+//                switch (i) {
+//                    case 0:
+//                        table[row][column] = EydiFinder.E;
+//                        break;
+//                    case 1:
+//                        table[row][column] = EydiFinder.Y;
+//                        break;
+//                    case 2:
+//                        table[row][column] = EydiFinder.D;
+//                        break;
+//                    case 3:
+//                        table[row][column] = EydiFinder.I;
+//                        break;
+//                }
+//            }
+//        }
+//        eydiFinder = new EydiFinder(table);
+//        System.out.println(eydiFinder.countEydis());
+//        for (char[] chars : table) {
+//            System.out.println(Arrays.toString(chars));
+//        }
     }
 }
